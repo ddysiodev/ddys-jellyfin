@@ -54,8 +54,17 @@ public sealed class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
 
     public void SaveNormalizedConfiguration(PluginConfiguration configuration)
     {
-        configuration.Normalize();
         UpdateConfiguration(configuration);
+    }
+
+    public override void UpdateConfiguration(BasePluginConfiguration configuration)
+    {
+        if (configuration is PluginConfiguration pluginConfiguration)
+        {
+            pluginConfiguration.Normalize();
+        }
+
+        base.UpdateConfiguration(configuration);
         Api.DdysClient.ClearCache();
     }
 }

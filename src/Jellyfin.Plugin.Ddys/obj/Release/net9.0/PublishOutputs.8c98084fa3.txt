@@ -1,0 +1,3 @@
+D:\code0622\Ddys\open-ecosystem\jellyfin\ddys-jellyfin\package\ddys-jellyfin\Jellyfin.Plugin.Ddys.dll
+D:\code0622\Ddys\open-ecosystem\jellyfin\ddys-jellyfin\package\ddys-jellyfin\Jellyfin.Plugin.Ddys.deps.json
+D:\code0622\Ddys\open-ecosystem\jellyfin\ddys-jellyfin\package\ddys-jellyfin\Jellyfin.Plugin.Ddys.pdb

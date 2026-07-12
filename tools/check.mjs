@@ -83,7 +83,7 @@ async function main() {
   assert(csproj.includes('EmbeddedResource Include="ThumbImage.png"'), 'Thumb image must be embedded.');
 
   const plugin = await read('src/Jellyfin.Plugin.Ddys/Plugin.cs');
-  for (const fragment of ['BasePlugin<PluginConfiguration>', 'IHasWebPages', '1bb6d203-7ff2-40c1-a0b6-7f8355120b61']) {
+  for (const fragment of ['BasePlugin<PluginConfiguration>', 'IHasWebPages', 'UpdateConfiguration', 'DdysClient.ClearCache', '1bb6d203-7ff2-40c1-a0b6-7f8355120b61']) {
     assert(plugin.includes(fragment), `Plugin missing ${fragment}.`);
   }
 
