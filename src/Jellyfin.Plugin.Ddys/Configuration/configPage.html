@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>低端影视 DDYS</title>
+</head>
+<body>
+    <div id="DdysConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-checkbox">
+        <div data-role="content">
+            <div class="content-primary">
+                <form id="DdysConfigForm">
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="ApiBase">API Base</label>
+                        <input id="ApiBase" name="ApiBase" type="url" is="emby-input" required />
+                        <div class="fieldDescription">低端影视 API 根地址。</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="SiteBase">Site Base</label>
+                        <input id="SiteBase" name="SiteBase" type="url" is="emby-input" required />
+                        <div class="fieldDescription">用于补全封面、详情页和外部链接。</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="ApiKey">API Key</label>
+                        <input id="ApiKey" name="ApiKey" type="password" is="emby-input" autocomplete="off" />
+                        <div class="fieldDescription">可选。填写后请求会附加 Authorization: Bearer。</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="HomeLimit">首页数量</label>
+                        <input id="HomeLimit" name="HomeLimit" type="number" min="1" max="80" is="emby-input" />
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="PageSize">分页数量</label>
+                        <input id="PageSize" name="PageSize" type="number" min="1" max="80" is="emby-input" />
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="TimeoutSeconds">超时秒数</label>
+                        <input id="TimeoutSeconds" name="TimeoutSeconds" type="number" min="3" max="60" is="emby-input" />
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="CacheMinutes">缓存分钟</label>
+                        <input id="CacheMinutes" name="CacheMinutes" type="number" min="1" max="120" is="emby-input" />
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="SavedSearches">常用搜索词</label>
+                        <textarea id="SavedSearches" name="SavedSearches" is="emby-input" rows="4"></textarea>
+                        <div class="fieldDescription">使用逗号、分号、竖线或换行分隔，频道根目录会生成搜索入口。</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="UserAgent">User-Agent</label>
+                        <input id="UserAgent" name="UserAgent" type="text" is="emby-input" />
+                    </div>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="EnableCache" name="EnableCache" type="checkbox" is="emby-checkbox" />
+                            <span>启用缓存</span>
+                        </label>
+                    </div>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="EnableDirectPlay" name="EnableDirectPlay" type="checkbox" is="emby-checkbox" />
+                            <span>启用直链播放</span>
+                        </label>
+                    </div>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="ShowExternalResources" name="ShowExternalResources" type="checkbox" is="emby-checkbox" />
+                            <span>展示网盘、磁力、下载页等外部资源</span>
+                        </label>
+                    </div>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="IncludeRelatedItems" name="IncludeRelatedItems" type="checkbox" is="emby-checkbox" />
+                            <span>详情页展示相关影片</span>
+                        </label>
+                    </div>
+                    <div>
+                        <button is="emby-button" type="submit" class="raised button-submit block emby-button">
+                            <span>保存</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript">
+            const DdysConfig = {
+                pluginUniqueId: '1bb6d203-7ff2-40c1-a0b6-7f8355120b61'
+            };
+
+            function setChecked(id, value) {
+                document.querySelector('#' + id).checked = !!value;
+            }
+
+            function setValue(id, value) {
+                document.querySelector('#' + id).value = value == null ? '' : value;
+            }
+
+            document.querySelector('#DdysConfigPage').addEventListener('pageshow', function () {
+                Dashboard.showLoadingMsg();
+                ApiClient.getPluginConfiguration(DdysConfig.pluginUniqueId).then(function (config) {
+                    setValue('ApiBase', config.ApiBase || 'https://ddys.io/api/v1');
+                    setValue('SiteBase', config.SiteBase || 'https://ddys.io');
+                    setValue('ApiKey', config.ApiKey || '');
+                    setValue('HomeLimit', config.HomeLimit || 24);
+                    setValue('PageSize', config.PageSize || 24);
+                    setValue('TimeoutSeconds', config.TimeoutSeconds || 12);
+                    setValue('CacheMinutes', config.CacheMinutes || 10);
+                    setValue('SavedSearches', config.SavedSearches || '');
+                    setValue('UserAgent', config.UserAgent || 'ddys-jellyfin/0.1.0');
+                    setChecked('EnableCache', config.EnableCache !== false);
+                    setChecked('EnableDirectPlay', config.EnableDirectPlay !== false);
+                    setChecked('ShowExternalResources', config.ShowExternalResources !== false);
+                    setChecked('IncludeRelatedItems', config.IncludeRelatedItems !== false);
+                    Dashboard.hideLoadingMsg();
+                });
+            });
+
+            document.querySelector('#DdysConfigForm').addEventListener('submit', function (e) {
+                Dashboard.showLoadingMsg();
+                ApiClient.getPluginConfiguration(DdysConfig.pluginUniqueId).then(function (config) {
+                    config.ApiBase = document.querySelector('#ApiBase').value;
+                    config.SiteBase = document.querySelector('#SiteBase').value;
+                    config.ApiKey = document.querySelector('#ApiKey').value;
+                    config.HomeLimit = Number(document.querySelector('#HomeLimit').value) || 24;
+                    config.PageSize = Number(document.querySelector('#PageSize').value) || 24;
+                    config.TimeoutSeconds = Number(document.querySelector('#TimeoutSeconds').value) || 12;
+                    config.CacheMinutes = Number(document.querySelector('#CacheMinutes').value) || 10;
+                    config.SavedSearches = document.querySelector('#SavedSearches').value;
+                    config.UserAgent = document.querySelector('#UserAgent').value;
+                    config.EnableCache = document.querySelector('#EnableCache').checked;
+                    config.EnableDirectPlay = document.querySelector('#EnableDirectPlay').checked;
+                    config.ShowExternalResources = document.querySelector('#ShowExternalResources').checked;
+                    config.IncludeRelatedItems = document.querySelector('#IncludeRelatedItems').checked;
+                    ApiClient.updatePluginConfiguration(DdysConfig.pluginUniqueId, config).then(function (result) {
+                        Dashboard.processPluginConfigurationUpdateResult(result);
+                    });
+                });
+
+                e.preventDefault();
+                return false;
+            });
+        </script>
+    </div>
+</body>
+</html>

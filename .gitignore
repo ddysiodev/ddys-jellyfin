@@ -1,0 +1,10 @@
+bin/
+obj/
+package/
+dist/
+node_modules/
+*.zip
+*.log
+.env
+.env.*
+!.env.example

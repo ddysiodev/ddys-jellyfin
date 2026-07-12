@@ -1,0 +1,16 @@
+---
+name: "低端影视 DDYS"
+guid: "1bb6d203-7ff2-40c1-a0b6-7f8355120b61"
+version: "0.1.0.0"
+targetAbi: "10.11.0.0"
+framework: "net9.0"
+overview: "低端影视 API 的官方 Jellyfin Server 频道插件"
+description: >
+  安装后可在 Jellyfin 频道中浏览 DDYS 最新、热门、分类、常用搜索词、详情资源，
+  并对 m3u8、mp4、mkv、webm、mpd 等直链创建可播放媒体项。
+category: "Channels"
+owner: "ddysiodev"
+artifacts:
+- "Jellyfin.Plugin.Ddys.dll"
+changelog: >
+  初始版本：频道浏览、详情资源、直链播放、外部资源展示、配置页、诊断接口和 Release ZIP。
