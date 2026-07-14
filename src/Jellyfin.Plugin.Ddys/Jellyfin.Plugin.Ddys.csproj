@@ -7,9 +7,11 @@
     <AssemblyName>Jellyfin.Plugin.Ddys</AssemblyName>
     <Description>DDYS channel plugin for Jellyfin Server.</Description>
     <PackageTags>ddys;jellyfin;plugin;channel;video;</PackageTags>
-    <Version>0.1.0</Version>
-    <AssemblyVersion>0.1.0.0</AssemblyVersion>
-    <FileVersion>0.1.0.0</FileVersion>
+    <Version>0.1.1</Version>
+    <AssemblyVersion>0.1.1.0</AssemblyVersion>
+    <FileVersion>0.1.1.0</FileVersion>
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
 

@@ -21,23 +21,22 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
 
       - name: Check repository
         run: node tools/check.mjs
 
-      - name: Build package
-        shell: pwsh
-        run: ./tools/build-package.ps1 -Version "${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || '0.1.0' }}"
+      - name: Run tests
+        run: node tests/run.mjs
 
-      - name: Collect artifact
-        shell: pwsh
-        run: |
-          New-Item -ItemType Directory -Force -Path dist | Out-Null
-          Copy-Item -Path ..\..\releases\ddys-jellyfin-v*.zip -Destination dist -Force
+      - name: Build package
+        shell: powershell
+        run: powershell -NoProfile -ExecutionPolicy Bypass -File tools/build-package.ps1 -Version "${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || '0.1.1' }}"
 
       - name: Upload package artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ddys-jellyfin
-          path: dist/ddys-jellyfin-v*.zip
+          name: ddys-jellyfin-v0.1.1
+          path: |
+            releases/ddys-jellyfin-v0.1.1.zip
+            releases/ddys-jellyfin-v0.1.1.zip.sha256

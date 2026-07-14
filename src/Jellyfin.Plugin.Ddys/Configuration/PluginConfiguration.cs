@@ -29,7 +29,7 @@ public sealed class PluginConfiguration : BasePluginConfiguration
 
     public string SavedSearches { get; set; } = string.Empty;
 
-    public string UserAgent { get; set; } = "ddys-jellyfin/0.1.0";
+    public string UserAgent { get; set; } = "ddys-jellyfin/0.1.1";
 
     public void Normalize()
     {
@@ -37,7 +37,7 @@ public sealed class PluginConfiguration : BasePluginConfiguration
         SiteBase = NormalizeBaseUrl(SiteBase, "https://ddys.io");
         ApiKey = (ApiKey ?? string.Empty).Trim();
         SavedSearches = (SavedSearches ?? string.Empty).Trim();
-        UserAgent = string.IsNullOrWhiteSpace(UserAgent) ? "ddys-jellyfin/0.1.0" : UserAgent.Trim();
+        UserAgent = string.IsNullOrWhiteSpace(UserAgent) ? "ddys-jellyfin/0.1.1" : UserAgent.Trim();
         HomeLimit = Clamp(HomeLimit, 24, 1, 80);
         PageSize = Clamp(PageSize, 24, 1, 80);
         TimeoutSeconds = Clamp(TimeoutSeconds, 12, 3, 60);

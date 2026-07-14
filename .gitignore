@@ -2,9 +2,13 @@ bin/
 obj/
 package/
 dist/
+releases/
 node_modules/
 *.zip
+*.sha256
 *.log
+*.tmp
+*.cache
 .env
 .env.*
 !.env.example

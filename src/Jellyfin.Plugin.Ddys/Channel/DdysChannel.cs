@@ -35,7 +35,7 @@ public sealed partial class DdysChannel : IChannel
 
     public string Description => Plugin.PluginDescription;
 
-    public string DataVersion => "0.1.0";
+    public string DataVersion => "0.1.1";
 
     public string HomePageUrl => "https://ddys.io";
 

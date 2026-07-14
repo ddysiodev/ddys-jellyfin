@@ -1,7 +1,7 @@
 ---
 name: "低端影视 DDYS"
 guid: "1bb6d203-7ff2-40c1-a0b6-7f8355120b61"
-version: "0.1.0.0"
+version: "0.1.1.0"
 targetAbi: "10.11.0.0"
 framework: "net9.0"
 overview: "低端影视 API 的官方 Jellyfin Server 频道插件"
@@ -13,4 +13,4 @@ owner: "ddysiodev"
 artifacts:
 - "Jellyfin.Plugin.Ddys.dll"
 changelog: >
-  初始版本：频道浏览、详情资源、直链播放、外部资源展示、配置页、诊断接口和 Release ZIP。
+  v0.1.1：补齐确定性 Release ZIP、SHA-256 校验文件、GitHub Actions 构建、自检测试和远端发布复核。

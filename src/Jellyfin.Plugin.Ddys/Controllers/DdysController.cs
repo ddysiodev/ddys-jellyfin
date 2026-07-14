@@ -43,8 +43,13 @@ public sealed class DdysController : ControllerBase
     }
 
     [HttpGet("Movies/{slug}")]
-    public async Task<ActionResult<DdysMovieResponse>> GetMovie([FromRoute] string slug, CancellationToken cancellationToken)
+    public async Task<ActionResult<DdysMovieResponse>> GetMovie([FromRoute] string? slug, CancellationToken cancellationToken)
     {
+        if (string.IsNullOrWhiteSpace(slug))
+        {
+            return new DdysMovieResponse();
+        }
+
         var bundle = await Client.DetailBundleAsync(slug, cancellationToken).ConfigureAwait(false);
         return DdysMovieResponse.From(bundle);
     }

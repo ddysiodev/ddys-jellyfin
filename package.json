@@ -1,12 +1,13 @@
 {
   "name": "ddys-jellyfin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Official Jellyfin Server channel plugin for the DDYS API.",
   "type": "module",
   "private": true,
   "scripts": {
     "check": "node tools/check.mjs",
-    "package": "powershell -ExecutionPolicy Bypass -File tools/build-package.ps1"
+    "test": "node tests/run.mjs",
+    "package": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/build-package.ps1"
   },
   "keywords": [
     "ddys",
@@ -15,5 +16,8 @@
     "channel",
     "video"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  }
 }
