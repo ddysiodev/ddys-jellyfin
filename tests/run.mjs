@@ -126,6 +126,7 @@ test('release workflow and package script are deterministic', async () => {
     'node-version: "24"',
     'node tools/check.mjs',
     'node tests/run.mjs',
+    'shell: pwsh',
     `ddys-jellyfin-v${version}.zip`,
     `ddys-jellyfin-v${version}.zip.sha256`
   ]) {

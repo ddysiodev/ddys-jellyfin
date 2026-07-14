@@ -109,6 +109,7 @@ async function checkWorkflow() {
     'node-version: "24"',
     'node tools/check.mjs',
     'node tests/run.mjs',
+    'shell: pwsh',
     'tools/build-package.ps1',
     `ddys-jellyfin-v${version}.zip`,
     `ddys-jellyfin-v${version}.zip.sha256`,

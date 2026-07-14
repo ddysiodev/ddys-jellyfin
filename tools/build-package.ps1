@@ -242,18 +242,21 @@ Get-ChildItem -LiteralPath $PackageDir -File |
     Remove-Item -Force
 
 $metaVersion = if ($Version -match "^\d+\.\d+\.\d+$") { "$Version.0" } else { $Version }
-$meta = [ordered]@{
-    name = "低端影视 DDYS"
-    guid = "1bb6d203-7ff2-40c1-a0b6-7f8355120b61"
-    version = $metaVersion
-    targetAbi = "10.11.0.0"
-    framework = "net9.0"
-    overview = "低端影视 API 的官方 Jellyfin Server 频道插件"
-    category = "Channels"
-    owner = "ddysiodev"
-    artifacts = @("Jellyfin.Plugin.Ddys.dll")
+$metaJson = @"
+{
+  "name": "\u4f4e\u7aef\u5f71\u89c6 DDYS",
+  "guid": "1bb6d203-7ff2-40c1-a0b6-7f8355120b61",
+  "version": "$metaVersion",
+  "targetAbi": "10.11.0.0",
+  "framework": "net9.0",
+  "overview": "\u4f4e\u7aef\u5f71\u89c6 API \u7684\u5b98\u65b9 Jellyfin Server \u9891\u9053\u63d2\u4ef6",
+  "category": "Channels",
+  "owner": "ddysiodev",
+  "artifacts": [
+    "Jellyfin.Plugin.Ddys.dll"
+  ]
 }
-$metaJson = $meta | ConvertTo-Json -Depth 5
+"@
 [System.IO.File]::WriteAllText(
     (Join-Path $PackageDir "meta.json"),
     $metaJson,
